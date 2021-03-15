@@ -1,11 +1,16 @@
 package com.example.AM_BANK_APP.domain;
+
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Table(name = "tili")
 @Entity
@@ -19,19 +24,8 @@ public class Tili {
 	private double saldo;
 	private String omistaja;
 	
-	//private List <String> tilitapahtumat;
-	
-	
-	/*
-	public Tili(String tilinro, double saldo, String omistaja, List<String> tilitapahtumat) {
-		super();
-		this.tilinro = tilinro;
-		this.saldo = saldo;
-		this.omistaja = omistaja;
-		this.tilitapahtumat = tilitapahtumat;
-	}
 
-*/
+
 	public Tili(String tilinro, double saldo, String omistaja) {
 		super();
 		this.tilinro = tilinro;
@@ -44,15 +38,6 @@ public class Tili {
 	}
 	
 	
-	/*
-	public List<String> getTilitapahtumat() {
-		return tilitapahtumat;
-	}
-
-	public void setTilitapahtumat(List<String> tilitapahtumat) {
-		this.tilitapahtumat = tilitapahtumat;
-	}
-*/
 	public String getTilinro() {
 		return tilinro;
 	}

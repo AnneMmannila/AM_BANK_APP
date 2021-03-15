@@ -9,25 +9,27 @@ import org.springframework.context.annotation.Bean;
 
 import com.example.AM_BANK_APP.domain.Tili;
 import com.example.AM_BANK_APP.domain.TiliRepository;
+import com.example.AM_BANK_APP.domain.Tilitapahtumat;
+import com.example.AM_BANK_APP.domain.TilitapahtumatRepository;
 
 
 
 @SpringBootApplication
 public class AmBankAppApplication {
 
-	private static final Logger log = LoggerFactory.getLogger(AmBankAppApplication.class);
 	
 	public static void main(String[] args) {
 		SpringApplication.run(AmBankAppApplication.class, args);
 	}
 
 	@Bean
-	public CommandLineRunner tilirunner(TiliRepository repository) {
+	public CommandLineRunner tilirunner(TiliRepository repository, TilitapahtumatRepository trepos) {
 		return (args) -> {
 			
 			repository.save(new Tili("FIA123456", 1000.0, "Anna A"));
 			repository.save(new Tili("FIB123456", 2000.0, "Bertta B"));	
 			
+			trepos.save(new Tilitapahtumat(200.0));
 		};
 
 		}

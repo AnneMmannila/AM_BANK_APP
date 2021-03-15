@@ -6,25 +6,22 @@
 charset=UTF-8" />
 </head>
 <body>
-<h1>I will be an BankApp </h1>
-<p>Tähän tulee näkyviin Annan tili. </p>
-<p>Tähän tulee näkyviin Bertan tili. </p>
+<h1>I will be a BankApp </h1>
 
- 
 	<table class="table table-striped">
 			<tbody>
 				<tr>
 					<th>Tilinro</th>
 					<th>Saldo</th>
 					<th>Omistaja</th>
-					<th>Tilitapahtumat</th>
+					
 					
 
 				</tr>
 				<tr th:each="tili : ${tilit}">
 					<td th:text="${tili.tilinro}"></td>
-					<td th:text="${tili.omistaja}"></td>
 					<td th:text="${tili.saldo}"></td>
+					<td th:text="${tili.omistaja}"></td>
 					
 				</tr>
 			</tbody>
