@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Table(name = "tili")
 @Entity
 public class Tili {
 
@@ -16,10 +18,11 @@ public class Tili {
 	private String tilinro;
 	private double saldo;
 	private String omistaja;
-	private List <String> tilitapahtumat;
+	
+	//private List <String> tilitapahtumat;
 	
 	
-	
+	/*
 	public Tili(String tilinro, double saldo, String omistaja, List<String> tilitapahtumat) {
 		super();
 		this.tilinro = tilinro;
@@ -28,6 +31,7 @@ public class Tili {
 		this.tilitapahtumat = tilitapahtumat;
 	}
 
+*/
 	public Tili(String tilinro, double saldo, String omistaja) {
 		super();
 		this.tilinro = tilinro;
@@ -40,7 +44,7 @@ public class Tili {
 	}
 	
 	
-	
+	/*
 	public List<String> getTilitapahtumat() {
 		return tilitapahtumat;
 	}
@@ -48,7 +52,7 @@ public class Tili {
 	public void setTilitapahtumat(List<String> tilitapahtumat) {
 		this.tilitapahtumat = tilitapahtumat;
 	}
-
+*/
 	public String getTilinro() {
 		return tilinro;
 	}
