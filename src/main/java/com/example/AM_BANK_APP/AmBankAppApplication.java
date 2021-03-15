@@ -29,7 +29,7 @@ public class AmBankAppApplication {
 			repository.save(new Tili("FIA123456", 1000.0, "Anna A"));
 			repository.save(new Tili("FIB123456", 2000.0, "Bertta B"));	
 			
-			trepos.save(new Tilitapahtumat(200.0));
+			trepos.save(new Tilitapahtumat(200.0)); 
 		};
 
 		}
