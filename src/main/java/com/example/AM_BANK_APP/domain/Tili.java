@@ -17,13 +17,21 @@ public class Tili {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private long id;
 	
 	private String tilinro;
 	private double saldo;
 	private String omistaja;
 	
+	
 
+	public Tili(long id, String tilinro, double saldo, String omistaja) {
+		super();
+		this.id = id;
+		this.tilinro = tilinro;
+		this.saldo = saldo;
+		this.omistaja = omistaja;
+	}
 
 	public Tili(String tilinro, double saldo, String omistaja) {
 		super();
@@ -37,6 +45,16 @@ public class Tili {
 	}
 	
 	
+	
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getTilinro() {
 		return tilinro;
 	}

@@ -16,9 +16,29 @@ public class Tilitapahtumat {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	private String omistaja;
 	private double tapahtuma;
+	
+	
+	
+	public Tilitapahtumat(String omistaja, double tapahtuma) {
+		super();
+		this.omistaja = omistaja;
+		this.tapahtuma = tapahtuma;
+	}
+
 
 	
+
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 
 	public Tilitapahtumat(double tapahtuma) {
 		super();
@@ -43,6 +63,14 @@ public class Tilitapahtumat {
 	@Override
 	public String toString() {
 		return "Tilitapahtumat [id=" + id + ", tapahtuma=" + tapahtuma + "]";
+	}
+
+	public String getOmistaja() {
+		return omistaja;
+	}
+
+	public void setOmistaja(String omistaja) {
+		this.omistaja = omistaja;
 	}
 
 	

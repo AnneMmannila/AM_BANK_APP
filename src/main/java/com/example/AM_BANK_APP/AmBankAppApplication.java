@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import com.example.AM_BANK_APP.domain.Tili;
 import com.example.AM_BANK_APP.domain.TiliRepository;
-import com.example.AM_BANK_APP.domain.Tilitapahtumat;
-import com.example.AM_BANK_APP.domain.TilitapahtumatRepository;
+
+
 
 
 
@@ -23,13 +23,16 @@ public class AmBankAppApplication {
 	}
 
 	@Bean
-	public CommandLineRunner tilirunner(TiliRepository repository, TilitapahtumatRepository trepos) {
+	public CommandLineRunner tilirunner(TiliRepository repos) {
 		return (args) -> {
 			
-			repository.save(new Tili("FIA123456", 1000.0, "Anna A"));
-			repository.save(new Tili("FIB123456", 2000.0, "Bertta B"));	
+			long id = (long)1;
+			long idb = (long)2;
+			long idc = (long)3;
+			repos.insertWithQuery(new Tili(id, "FIA123456", 2000.0, "Anna A"));
+			repos.insertWithQuery(new Tili(idb, "FIB123456", 2000.0, "Bertta B"));
+			repos.insertWithQuery(new Tili(idc, "FIC123456", 2000.0, "Cecilia C"));
 			
-			trepos.save(new Tilitapahtumat(200.0)); 
 		};
 
 		}
