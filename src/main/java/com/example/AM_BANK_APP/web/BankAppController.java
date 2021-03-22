@@ -8,12 +8,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.AM_BANK_APP.domain.Maksu;
 import com.example.AM_BANK_APP.domain.Tili;
 import com.example.AM_BANK_APP.domain.TiliRepository;
+import com.example.AM_BANK_APP.domain.TilitapahtumaException;
 
 @Controller
 public class BankAppController {
 
+	
+	//https://o7planning.org/11661/spring-boot-jpa-and-spring-transaction
+	
 	@Autowired
 	private TiliRepository repository;
 
@@ -29,50 +34,38 @@ public class BankAppController {
 	}
 
 
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String save(Tili tili) {
-		
-		return "redirect:bankapp";
-	}
-
-	@RequestMapping(value = "/add")
-	public String addBook(Model model) {
-		List<Tili> lista = repository.listTilit();
-		model.addAttribute("tili", lista);
-
-		return "uusimaksu";
-	}
 	
-	/*
-	  @RequestMapping(value = "/sendMoney", method = RequestMethod.GET)
+	  @RequestMapping(value = "/maksu", method = RequestMethod.GET)
 	    public String viewSendMoneyPage(Model model) {
 	 
-	        SendMoneyForm form = new SendMoneyForm(1L, 2L, 700d);
+	        Maksu maksu = new Maksu(1L, 2L, 700d);
 	 
-	        model.addAttribute("sendMoneyForm", form);
+	        model.addAttribute("uusimaksu", maksu);
 	 
-	        return "sendMoneyPage";
+	        return "uusimaksu";
 	    }
 	 
 	  
-	    @RequestMapping(value = "/sendMoney", method = RequestMethod.POST)
-	    public String processSendMoney(Model model, SendMoneyForm sendMoneyForm) {
+	    @RequestMapping(value = "/maksu", method = RequestMethod.POST)
+	    public String processSendMoney(Model model, Maksu maksu) {
 	 
-	        System.out.println("Send Money: " + sendMoneyForm.getAmount());
+	    	List<Tili> lista = repository.listTilit();
+	    	model.addAttribute("tilit", lista);
+	    	
+	        System.out.println("Send Money: " + maksu.getMaara());
 	 
 	        try {
-	            bankAccountDAO.sendMoney(sendMoneyForm.getFromAccountId(), //
-	                    sendMoneyForm.getToAccountId(), //
-	                    sendMoneyForm.getAmount());
-	        } catch (BankTransactionException e) {
+	            repository.sendMoney(maksu.getTililta(), //
+	                    maksu.getTilille(), //
+	                    maksu.getMaara());
+	        } catch (TilitapahtumaException e) {
 	            model.addAttribute("errorMessage", "Error: " + e.getMessage());
-	            return "/sendMoneyPage";
+	            return "/maksu";
 	        }
-	        return "redirect:/";
+	        return "redirect:/bankapp";
 	    }
 	 
-	 
-	 */
+	
 	}
 	
 	

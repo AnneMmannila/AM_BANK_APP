@@ -4,18 +4,18 @@ public class Maksu {
 
 	private Long tililta;
 	private Long tilille;
-	private double saldo;
+	private double maara;
 
 	
 	public Maksu() {
 		super();
 	}
 
-	public Maksu(Long tililta, Long tilille, double saldo) {
+	public Maksu(Long tililta, Long tilille, double maara) {
 		super();
 		this.tililta = tililta;
 		this.tilille = tilille;
-		this.saldo = saldo;
+		this.maara = maara;
 	}
 
 	public Long getTililta() {
@@ -34,17 +34,17 @@ public class Maksu {
 		this.tilille = tilille;
 	}
 
-	public double getSaldo() {
-		return saldo;
+	public double getMaara() {
+		return maara;
 	}
 
-	public void setSaldo(double saldo) {
-		this.saldo = saldo;
+	public void setMaara(double maara) {
+		this.maara = maara;
 	}
 
 	@Override
 	public String toString() {
-		return "Maksu [tililta=" + tililta + ", tilille=" + tilille + ", saldo=" + saldo + "]";
+		return "Maksu [tililta=" + tililta + ", tilille=" + tilille + ", maara=" + maara + "]";
 	}
 
 }

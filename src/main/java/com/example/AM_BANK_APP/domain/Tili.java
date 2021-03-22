@@ -19,6 +19,7 @@ public class Tili {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+
 	private String tilinro;
 	private double saldo;
 	private String omistaja;
