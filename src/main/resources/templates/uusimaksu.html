@@ -12,11 +12,19 @@ charset=UTF-8" />
          <table>
            <tr>
               <td>Tililtä</td>
-              <td><input type="text" th:field="*{tililta}"/></td>
+              <td><select id="tilinrot" class="form-control" th:field="*{tililta}">
+       			<option th:value="FIA123456" > FIA123456</option>
+       			<option th:value="FIB123456" > FIB123456</option>
+       			<option th:value="FIC123456" > FIC123456</option>
+    		</select> </td>
            </tr>
            <tr>
               <td>Tilille</td>
-              <td><input type="text" th:field="*{tilille}"/></td>
+               <td><select id="tilinrot" class="form-control" th:field="*{tilille}">
+       			<option th:value="FIA123456" > FIA123456</option>
+       			<option th:value="FIB123456" > FIB123456</option>
+       			<option th:value="FIC123456" > FIC123456</option>
+    		</select> </td>
            </tr>
             <tr>
               <td>Määrä</td>
@@ -27,9 +35,7 @@ charset=UTF-8" />
               
              <td> <div style="clear: both; display: block; height: 10px;"></div>						
 		  	
-			 <select id="tilinrot" class="form-control">
-       			<option th:each="tili: ${tilit}" th:value="${tili.tilinro}" th:text="${tili.tilinro}"></option>
-    		</select> </td>
+			 
               <td><input type="submit" value="Send"/></td>
            </tr>       
          </table>      

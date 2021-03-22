@@ -25,18 +25,18 @@ public class TiliRepository{
 	 
 	    @Transactional
 	    public void insertWithQuery(Tili tili) {
-	        entityManager.createNativeQuery("INSERT INTO tili (id, tilinro, saldo, omistaja) VALUES (?,?,?,?)")
-	        .setParameter(1, tili.getId())
-	          .setParameter(2, tili.getTilinro())
-	          .setParameter(3, tili.getSaldo())
-	          .setParameter(4, tili.getOmistaja())
+	        entityManager.createNativeQuery("INSERT INTO tili (tilinro, saldo, omistaja) VALUES (?,?,?)")
+	          .setParameter(1, tili.getTilinro())
+	          .setParameter(2, tili.getSaldo())
+	          .setParameter(3, tili.getOmistaja())
 	          .executeUpdate();
 	    }
-	    
-	    public Tili findById(Long id) { 
-	        return this.entityManager.find(Tili.class, id);
-	    }
+	  
 	 
+	    public Tili findByTilinro(String tilinro) { 
+	        return this.entityManager.find(Tili.class, tilinro);
+	    }
+	    
 	    public List<Tili> listTilit() {
 	        String sql = "Select new " + Tili.class.getName() //
 	                + "(e.tilinro, e.saldo, e.omistaja) " //
@@ -47,15 +47,15 @@ public class TiliRepository{
 	 
 	    // MANDATORY: Transaction must be created before.
 	    @Transactional(propagation = Propagation.MANDATORY )
-	    public void addAmount(Long id, double amount) throws TilitapahtumaException {
-	        Tili tili = this.findById(id);
+	    public void addAmount(String tilinro, double amount) throws TilitapahtumaException {
+	        Tili tili = this.findByTilinro(tilinro);
 	        if (tili == null) {
-	            throw new TilitapahtumaException("Tiliä ei löytynyt " + id);
+	            throw new TilitapahtumaException("Tiliä ei löytynyt " + tilinro);
 	        }
 	        double uusisaldo = tili.getSaldo() + amount;
 	        if (tili.getSaldo() + amount < 0) {
 	            throw new TilitapahtumaException(
-	                    "Tilin '" + id + "' kate ei riitä (" + tili.getSaldo() + ")");
+	                    "Tilin '" + tilinro + "' kate ei riitä (" + tili.getSaldo() + ")");
 	        }
 	        tili.setSaldo(uusisaldo);
 	    }
@@ -63,7 +63,7 @@ public class TiliRepository{
 	    // Do not catch BankTransactionException in this method.
 	    @Transactional(propagation = Propagation.REQUIRES_NEW, 
 	                        rollbackFor = TilitapahtumaException.class)
-	    public void sendMoney(Long tililta, Long tilille, double amount) throws TilitapahtumaException {
+	    public void sendMoney(String tililta, String tilille, double amount) throws TilitapahtumaException {
 	 
 	        addAmount(tililta, amount);
 	        addAmount(tilille, -amount);

@@ -26,12 +26,9 @@ public class AmBankAppApplication {
 	public CommandLineRunner tilirunner(TiliRepository repos) {
 		return (args) -> {
 			
-			long id = (long)1;
-			long idb = (long)2;
-			long idc = (long)3;
-			repos.insertWithQuery(new Tili(id, "FIA123456", 2000.0, "Anna A"));
-			repos.insertWithQuery(new Tili(idb, "FIB123456", 2000.0, "Bertta B"));
-			repos.insertWithQuery(new Tili(idc, "FIC123456", 2000.0, "Cecilia C"));
+			repos.insertWithQuery(new Tili("FIA123456", 2000.0, "Anna A"));
+			repos.insertWithQuery(new Tili("FIB123456", 2000.0, "Bertta B"));
+			repos.insertWithQuery(new Tili( "FIC123456", 2000.0, "Cecilia C"));
 			
 		};
 

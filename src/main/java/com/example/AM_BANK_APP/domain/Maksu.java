@@ -2,8 +2,8 @@ package com.example.AM_BANK_APP.domain;
 
 public class Maksu {
 
-	private Long tililta;
-	private Long tilille;
+	private String tililta;
+	private String tilille;
 	private double maara;
 
 	
@@ -11,26 +11,26 @@ public class Maksu {
 		super();
 	}
 
-	public Maksu(Long tililta, Long tilille, double maara) {
+	public Maksu(String tililta, String tilille, double maara) {
 		super();
 		this.tililta = tililta;
 		this.tilille = tilille;
 		this.maara = maara;
 	}
 
-	public Long getTililta() {
+	public String getTililta() {
 		return tililta;
 	}
 
-	public void setTililta(Long tililta) {
+	public void setTililta(String tililta) {
 		this.tililta = tililta;
 	}
 
-	public Long getTilille() {
+	public String getTilille() {
 		return tilille;
 	}
 
-	public void setTilille(Long tilille) {
+	public void setTilille(String tilille) {
 		this.tilille = tilille;
 	}
 

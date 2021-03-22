@@ -38,7 +38,7 @@ public class BankAppController {
 	  @RequestMapping(value = "/maksu", method = RequestMethod.GET)
 	    public String viewSendMoneyPage(Model model) {
 	 
-	        Maksu maksu = new Maksu(1L, 2L, 700d);
+	        Maksu maksu = new Maksu("FIA123456", "FIB123456", 700d);
 	 
 	        model.addAttribute("uusimaksu", maksu);
 	 
