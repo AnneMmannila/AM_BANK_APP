@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.AM_BANK_APP.domain.Maksu;
 import com.example.AM_BANK_APP.domain.Tili;
@@ -21,6 +22,15 @@ public class BankAppController {
 	
 	@Autowired
 	private TiliRepository repository;
+	
+	
+	// RESTful service to get tilinrot
+    @RequestMapping(value="/tilinrot", method = RequestMethod.GET)
+    public @ResponseBody List<Tili> tiliRest() {	
+        return (List<Tili>) repository.listTilinrot();
+    } 
+	
+	
 
 	@RequestMapping("/bankapp")
 	public String frontpage(Model model) {

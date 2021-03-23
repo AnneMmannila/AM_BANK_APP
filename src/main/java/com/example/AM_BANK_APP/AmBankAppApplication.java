@@ -28,7 +28,7 @@ public class AmBankAppApplication {
 			
 			repos.insertWithQuery(new Tili("FIA123456", 2000.0, "Anna A"));
 			repos.insertWithQuery(new Tili("FIB123456", 2000.0, "Bertta B"));
-			repos.insertWithQuery(new Tili( "FIC123456", 2000.0, "Cecilia C"));
+			
 			
 		};
 

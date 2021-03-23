@@ -26,6 +26,12 @@ public class Tili {
 	
 	
 
+	public Tili(String tilinro) {
+		super();
+		this.tilinro = tilinro;
+	}
+
+
 	public Tili(String tilinro, double saldo, String omistaja) {
 		super();
 		this.tilinro = tilinro;

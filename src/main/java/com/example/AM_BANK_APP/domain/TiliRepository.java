@@ -37,6 +37,18 @@ public class TiliRepository{
 	        return this.entityManager.find(Tili.class, tilinro);
 	    }
 	    
+	   
+		public List<Tili> listTilinrot() {
+	      
+	    	String sql = "Select new " + Tili.class.getName() //
+	                + "(e.tilinro) " //
+	                + " from " + Tili.class.getName() + " e ";
+	        Query query = entityManager.createQuery(sql, Tili.class);
+	      
+	        return query.getResultList();
+	    }
+	    
+	    
 	    public List<Tili> listTilit() {
 	        String sql = "Select new " + Tili.class.getName() //
 	                + "(e.tilinro, e.saldo, e.omistaja) " //
