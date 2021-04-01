@@ -30,6 +30,13 @@ public class BankAppController {
         return (List<Tili>) repository.listTilinrot();
     } 
 	
+    
+    @RequestMapping("/login")
+    public String loginpage() {
+    	
+    	return "login";
+    };
+    
 	
 
 	@RequestMapping("/bankapp")
