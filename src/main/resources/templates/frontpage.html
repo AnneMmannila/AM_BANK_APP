@@ -6,8 +6,8 @@
 charset=UTF-8" />
 </head>
 <body>
-<h1>I will be a BankApp </h1>
 
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 
 <div class="col-md-4" style="padding: 20px 0">
 			<form th:action="@{/logout}" method="post">
@@ -23,18 +23,35 @@ charset=UTF-8" />
 					<th>Saldo</th>
 					<th>Omistaja</th>
 					
-					
-
-				</tr>
-				<tr th:each="tili : ${tilit}">
-					<td th:text="${tili.tilinro}"></td>
-					<td th:text="${tili.saldo}"></td>
+					<tr th:each="tili : ${tilit}">
+				<td th:text="${tili.tilinro}"></td>
+				<td th:text="${tili.saldo}"></td>
 					<td th:text="${tili.omistaja}"></td>
 				</tr>
+
+			
 			</tbody>
 		</table>
 	<a href="/maksu" class="btn btn-success">Uusi maksu</a>
 
+
+
+	<table class="table table-striped">
+			<tbody>
+				<tr>
+					<th>Tapahtuman id</th>
+					
+					<th>Siirto</th>
+					
+					
+
+				</tr>
+				<tr th:each="tapahtuma : ${tilitapahtumat}">
+					<td th:text="${tapahtuma.id}"></td>
+					<td th:text="${tapahtuma.tapahtuma}"></td>
+				</tr>
+			</tbody>
+		</table>
 
 </body>
 </html>

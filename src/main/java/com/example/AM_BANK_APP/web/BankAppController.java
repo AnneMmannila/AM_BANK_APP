@@ -3,6 +3,8 @@ package com.example.AM_BANK_APP.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,9 @@ import com.example.AM_BANK_APP.domain.Maksu;
 import com.example.AM_BANK_APP.domain.Tili;
 import com.example.AM_BANK_APP.domain.TiliRepository;
 import com.example.AM_BANK_APP.domain.TilitapahtumaException;
+import com.example.AM_BANK_APP.domain.Tilitapahtumat;
+import com.example.AM_BANK_APP.domain.User;
+import com.example.AM_BANK_APP.domain.UserRepository;
 
 @Controller
 public class BankAppController {
@@ -23,6 +28,8 @@ public class BankAppController {
 	@Autowired
 	private TiliRepository repository;
 	
+	@Autowired
+	UserRepository urepository;
 	
 	// RESTful service to get tilinrot
     @RequestMapping(value="/tilinrot", method = RequestMethod.GET)
@@ -42,10 +49,19 @@ public class BankAppController {
 	@RequestMapping("/bankapp")
 	public String frontpage(Model model) {
 
+		 UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	        String username = user.getUsername();
+	        User userNow = urepository.findByUsername(username);
 		
-		List<Tili> lista = repository.listTilit();
+		
+		List<Tili> lista = repository.findByUser(userNow);
 		model.addAttribute("tilit", lista);
-
+		System.out.println(lista);
+		
+		List <Tilitapahtumat> listatapahtumat = repository.listTapahtumat(userNow);
+		model.addAttribute("tilitapahtumat" , listatapahtumat);
+		
+		
 		return "frontpage";
 
 	}
@@ -54,8 +70,9 @@ public class BankAppController {
 	
 	  @RequestMapping(value = "/maksu", method = RequestMethod.GET)
 	    public String viewSendMoneyPage(Model model) {
-	 
-	        Maksu maksu = new Maksu("FIA123456", "FIB123456", 700d);
+		  List <Tili> tilinrot  = repository.listTilinrot();
+		   model.addAttribute("tilinrot", tilinrot);
+	        Maksu maksu = new Maksu("FIA123456", "FIB123456", 0d);
 	 
 	        model.addAttribute("uusimaksu", maksu);
 	 

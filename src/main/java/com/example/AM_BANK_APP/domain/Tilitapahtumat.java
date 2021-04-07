@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 
@@ -13,50 +16,92 @@ public class Tilitapahtumat {
 
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	
+	private String id;
+
 	private String omistaja;
-	private double tapahtuma;
 	
 	
 	
-	public Tilitapahtumat(String omistaja, double tapahtuma) {
-		super();
+
+	public String getOmistaja() {
+		return omistaja;
+	}
+
+
+
+
+	public void setOmistaja(String omistaja) {
 		this.omistaja = omistaja;
-		this.tapahtuma = tapahtuma;
 	}
 
-
+	private String tapahtuma;
 	
-
 	
-	public long getId() {
-		return id;
+	@ManyToOne
+	@JoinColumn(name = "tilinro")
+	private Tili tilinro;
+	
+	
+	public Tili getTilinro() {
+		return tilinro;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+
+
+
+	public void setTilinro(Tili tilinro) {
+		this.tilinro = tilinro;
 	}
 
 
-	public Tilitapahtumat(double tapahtuma) {
+
+
+	public Tilitapahtumat(String id, Tili tilinro, String tapahtuma) {
 		super();
+		this.id = id;
+		this.tapahtuma = tapahtuma;
+		this.tilinro = tilinro;
+	}
+
+
+
+
+	public Tilitapahtumat(String id, String tapahtuma) {
+		super();
+		this.id = id;
 		this.tapahtuma = tapahtuma;
 	}
+
+
+
 
 	public Tilitapahtumat() {
 		super();
 	}
 
 
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+	public Tilitapahtumat(String tapahtuma) {
+		super();
+		this.tapahtuma = tapahtuma;
+	}
+
 
 	
-	public double getTapahtuma() {
+	public String getTapahtuma() {
 		return tapahtuma;
 	}
 
-	public void setTapahtuma(double tapahtuma) {
+	public void setTapahtuma(String tapahtuma) {
 		this.tapahtuma = tapahtuma;
 	}
 
@@ -65,13 +110,6 @@ public class Tilitapahtumat {
 		return "Tilitapahtumat [id=" + id + ", tapahtuma=" + tapahtuma + "]";
 	}
 
-	public String getOmistaja() {
-		return omistaja;
-	}
-
-	public void setOmistaja(String omistaja) {
-		this.omistaja = omistaja;
-	}
 
 	
 	 

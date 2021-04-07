@@ -1,6 +1,8 @@
 package com.example.AM_BANK_APP.domain;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -31,8 +33,10 @@ public class TiliRepository{
 	          .setParameter(3, tili.getOmistaja())
 	          .executeUpdate();
 	    }
-	  
 	 
+	    
+	    
+	    
 	    public Tili findByTilinro(String tilinro) { 
 	        return this.entityManager.find(Tili.class, tilinro);
 	    }
@@ -71,15 +75,63 @@ public class TiliRepository{
 	        }
 	        tili.setSaldo(uusisaldo);
 	    }
+	    
+	    
+	    //tilitapahtumat alkaa
+
 	 
 	    // Do not catch BankTransactionException in this method.
 	    @Transactional(propagation = Propagation.REQUIRES_NEW, 
 	                        rollbackFor = TilitapahtumaException.class)
 	    public void sendMoney(String tililta, String tilille, double amount) throws TilitapahtumaException {
 	 
-	        addAmount(tililta, amount);
-	        addAmount(tilille, -amount);
+	        addAmount(tililta, -amount);
+	        addAmount(tilille, amount);
+	        
+	      addTapahtuma(tililta, String.valueOf(-amount));
+	      addTapahtuma(tilille, String.valueOf(amount));
+	      
 	    }
+	    
+	    
+	    @Transactional
+	    public void insertWithQueryT(Tilitapahtumat tilitapahtuma) {
+	        entityManager.createNativeQuery("INSERT INTO tilitapahtumat (id, tilinro, tapahtuma) VALUES (?, ?, ?)")
+	         .setParameter(1,tilitapahtuma.getId())
+	         .setParameter(2, tilitapahtuma.getTilinro())
+	          .setParameter(3, tilitapahtuma.getTapahtuma())
+	          .executeUpdate();
+	    }
+	    
+	    //tilitapahtuman lisääminen
+	    @Transactional(propagation = Propagation.MANDATORY )
+	    public void addTapahtuma(String tilinro, String amount) throws TilitapahtumaException {
+	    	String uniqueID = UUID.randomUUID().toString();
+	    	Tili tili = new Tili(tilinro);
+	        Tilitapahtumat uusitapahtuma = new Tilitapahtumat(uniqueID, tili, amount);
+	        insertWithQueryT(uusitapahtuma);
+	      
+	    }
+	    
+	    //kaikkitapahtumat
+	    public List<Tilitapahtumat> listTapahtumat(User userNow) {
+	    	
+	    List<Tilitapahtumat> list = entityManager.createQuery("SELECT new " + Tilitapahtumat.class.getName() + "(e.id, e.tapahtuma) from "+ Tilitapahtumat.class.getName() + " e "+"join "+ Tili.class.getName() + " o  on o.tilinro = e.tilinro where o.omistaja = ?1")
+	    		.setParameter(1, userNow.getUsername())
+	    		.getResultList();
+	    System.out.println(list);	
+	    
+	            return list;
+	    }
+
+	
+		public List<Tili> findByUser(User userNow) {
+			List<Tili> tili = entityManager.createQuery("SELECT new " + Tili.class.getName() + "(e.tilinro, e.saldo, e.omistaja) from "+ Tili.class.getName() + " e "+" where e.omistaja = ?1")
+				      .setParameter(1, userNow.getUsername())
+				      .getResultList();
+			return tili;
+		}
+	    
 	 
 	}
 
