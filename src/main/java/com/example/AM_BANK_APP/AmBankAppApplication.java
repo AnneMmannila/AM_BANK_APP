@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 import com.example.AM_BANK_APP.domain.Tili;
 import com.example.AM_BANK_APP.domain.TiliRepository;
@@ -13,7 +14,7 @@ import com.example.AM_BANK_APP.domain.User;
 import com.example.AM_BANK_APP.domain.UserRepository;
 
 
-
+@ComponentScan(basePackages = {"com.example.AM_BANK_APP.domain"})
 @SpringBootApplication
 public class AmBankAppApplication {
 
