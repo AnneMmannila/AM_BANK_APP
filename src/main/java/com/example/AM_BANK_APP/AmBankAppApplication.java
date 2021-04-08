@@ -13,8 +13,8 @@ import com.example.AM_BANK_APP.domain.TiliRepository;
 import com.example.AM_BANK_APP.domain.User;
 import com.example.AM_BANK_APP.domain.UserRepository;
 
-
-@ComponentScan(basePackages = {"com.example.AM_BANK_APP.domain"})
+//For testing
+//@ComponentScan(basePackages = {"com.example.AM_BANK_APP.domain"}) 
 @SpringBootApplication
 public class AmBankAppApplication {
 
