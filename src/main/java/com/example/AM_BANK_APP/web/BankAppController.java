@@ -34,7 +34,7 @@ public class BankAppController {
 	// RESTful service to get tilinrot
     @RequestMapping(value="/tilinrot", method = RequestMethod.GET)
     public @ResponseBody List<Tili> tiliRest() {	
-        return (List<Tili>) repository.listTilinrot();
+        return (List<Tili>) repository.listkaikkiTilinrot();
     } 
 	
     
@@ -70,9 +70,16 @@ public class BankAppController {
 	
 	  @RequestMapping(value = "/maksu", method = RequestMethod.GET)
 	    public String viewSendMoneyPage(Model model) {
-		  List <Tili> tilinrot  = repository.listTilinrot();
+		  UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	        String username = user.getUsername();
+	        User userNow = urepository.findByUsername(username);
+		  
+		  List <Tili> tilinrot  = repository.listTilinrot(userNow);
 		   model.addAttribute("tilinrot", tilinrot);
-	        Maksu maksu = new Maksu("FIA123456", "FIB123456", 0d);
+		   
+		   List <Tili> siirtotili = repository.listkaikkiTilinrot();
+		   model.addAttribute("siirtotili", siirtotili);
+	        Maksu maksu = new Maksu("", "", 0d);
 	 
 	        model.addAttribute("uusimaksu", maksu);
 	 

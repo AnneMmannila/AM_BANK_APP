@@ -17,9 +17,9 @@ charset=UTF-8" />
        			<option th:each="tili: ${tilinrot}" th:value="${tili.tilinro}" th:text="${tili.tilinro}"></option>
     		</select>
   		 <div style="clear: both; display: block; height: 10px;"></div>						
-		  	<label for="tilinrot">Tilille</label>
-			 <select id="tilinrot" th:field="*{tilille}" class="form-control">
-       			<option th:each="tili: ${tilinrot}" th:value="${tili.tilinro}" th:text="${tili.tilinro}"></option>
+		  	<label for="siirtotili">Tilille</label>
+			 <select id="siirtotili" th:field="*{tilille}" class="form-control">
+       			<option th:each="tili: ${siirtotili}" th:value="${tili.tilinro}" th:text="${tili.tilinro}"></option>
     		</select>
   <br> <br>
   			<label for="maara">Määrä:</label>	
