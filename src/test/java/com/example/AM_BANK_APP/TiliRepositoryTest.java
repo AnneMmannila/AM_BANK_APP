@@ -26,7 +26,7 @@ public class TiliRepositoryTest {
 		public void listing() {
 		
 		List<Tili> tilit = repository.listTilit();
-		assertThat(tilit).hasSize(2);
+		assertThat(tilit).hasSize(3);
 		assertThat(tilit.get(0).getOmistaja()).isEqualTo("Anna A");
 }
 	

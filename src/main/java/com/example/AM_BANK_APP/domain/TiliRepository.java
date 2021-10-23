@@ -109,7 +109,7 @@ public class TiliRepository {
 
 	}
 
-	// kaikkitapahtumat
+	// kaikkitilitapahtumat
 	public List<Tilitapahtumat> listTapahtumat(User userNow) {
 
 		List<Tilitapahtumat> list = entityManager
